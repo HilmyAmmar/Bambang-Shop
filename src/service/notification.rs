@@ -19,7 +19,7 @@ impl NotificationService {
     pub fn unsubscribe(product_type: &str, url: &str) -> Result<Subscriber> {
         let product_type_upper: String = product_type.to_uppercase();
         let product_type_str: &str = product_type_upper.as_str();
-        let result:Option<Subscriber> = SubscriberRepository::delete(product_type_str, url);
+        let result: Option<Subscriber> = SubscriberRepository::delete(product_type_str, url);
         if result.is_none() {
             return Err(compose_error_response(
                 Status::NotFound,
@@ -36,7 +36,7 @@ impl NotificationService {
             subscriber_name: String::from(""),
             status: String::from(status),
         };
-        let subscribers: Vec(Subscriber) = SubscriberRepository::list_all(product_type);
+        let subscribers: Vec<Subscriber> = SubscriberRepository::list_all(product_type);
         for subscriber in subscribers {
             payload.subscriber_name = subscriber.clone().name;
             let subscriber_clone = subscriber.clone();
